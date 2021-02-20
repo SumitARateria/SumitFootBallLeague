@@ -19,21 +19,36 @@ public class TeamStanding {
 
 	@JsonProperty("team_id")
 	int teamId;
-	
+
 	@JsonProperty("team_name")
 	String teamName;
-	
+
 	@JsonProperty("country_name")
 	String countryName;
-	
+
 	@JsonProperty("league_id")
 	int leagueId;
-	
+
 	@JsonProperty("league_name")
 	String leagueName;
-	
+
 	@JsonProperty("overall_league_position")
 	int overallLeaguePosition;
+
+	public TeamStanding() {
+
+	}
+
+	public TeamStanding(int teamId, String teamName, String countryName, int leagueId, String leagueName,
+			int overallLeaguePosition) {
+		super();
+		this.teamId = teamId;
+		this.teamName = teamName;
+		this.countryName = countryName;
+		this.leagueId = leagueId;
+		this.leagueName = leagueName;
+		this.overallLeaguePosition = overallLeaguePosition;
+	}
 
 	public int getTeamId() {
 		return teamId;
@@ -82,7 +97,5 @@ public class TeamStanding {
 	public void setLeagueName(String leagueName) {
 		this.leagueName = leagueName;
 	}
-	
-	
-	
+
 }

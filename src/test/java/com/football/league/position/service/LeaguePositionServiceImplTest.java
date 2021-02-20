@@ -73,7 +73,7 @@ public class LeaguePositionServiceImplTest {
 		
 		when(restTemplate.exchange(ArgumentMatchers.anyString(), ArgumentMatchers.any(), 
 				 ArgumentMatchers.any(), ArgumentMatchers.<Class<List<TeamStanding>>>any()))
-				.thenReturn(new ResponseEntity(new ArrayList().add(new TeamStanding(1, "USA", 4324, "LeagueTest", 2421, "TeamTest", 3)), HttpStatus.ACCEPTED));
+				.thenReturn(new ResponseEntity(new ArrayList().add(new TeamStanding(1, "USA", "LeagueTest", 2421, "TeamTest", 3)), HttpStatus.ACCEPTED));
 		
 		int teamPostiton= teamStanding.getOverallLeaguePosition();
 		assertTrue(teamPostiton == 3);

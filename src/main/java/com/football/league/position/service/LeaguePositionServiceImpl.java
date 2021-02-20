@@ -25,62 +25,59 @@ public class LeaguePositionServiceImpl implements LeaguePositionService{
 	final String uri= "http://apiv2.apifootball.com/";
 
 	@Override
-	public List<Country> getCountryList() {
+	public Country[] getCountryList() {
 		
-		HttpEntity<List<Country>>  countryReq= new HttpEntity<>(buildHeaders());
 		UriComponentsBuilder uriBuilder= UriComponentsBuilder.fromHttpUrl(uri)
-				.queryParam("action", "get_countries");
-		ResponseEntity<List<Country>> countryResponse= restTemplate.exchange(uriBuilder.toUriString(),
-				HttpMethod.GET, countryReq, new ParameterizedTypeReference<List<Country>>() {
-		});
+				.queryParam("action", "get_countries")
+				.queryParam("APIkey", "9bb66184e0c8145384fd2cc0f7b914ada57b4e8fd2e4d6d586adcc27c257a978");
+		ResponseEntity<Country[]> countryResponse= restTemplate.exchange(uriBuilder.toUriString(),
+				HttpMethod.GET, new HttpEntity<>(buildHeaders()), Country[].class);
 	
 		return countryResponse.getBody();
 	}
 
 	@Override
-	public List<League> getLeagueList(int countryId) {
-		HttpEntity<List<League>>  leagueReq= new HttpEntity<>(buildHeaders());
+	public League[] getLeagueList(int countryId) {
 		UriComponentsBuilder uriBuilder= UriComponentsBuilder.fromHttpUrl(uri)
 				.queryParam("action", "get_leagues")
-				.queryParam("country_id", countryId);
-		ResponseEntity<List<League>> leagueResponse= restTemplate.exchange(uriBuilder.toUriString(),
-				HttpMethod.GET, leagueReq, new ParameterizedTypeReference<List<League>>() {
-		});
+				.queryParam("country_id", countryId)
+				.queryParam("APIkey", "9bb66184e0c8145384fd2cc0f7b914ada57b4e8fd2e4d6d586adcc27c257a978");
+		ResponseEntity<League[]> leagueResponse= restTemplate.exchange(uriBuilder.toUriString(),
+				HttpMethod.GET, new HttpEntity<>(buildHeaders()), League[].class);
 	
 		return leagueResponse.getBody();
 	}
 
 	@Override
-	public List<Team> getTeamList(int leagueId) {
-		HttpEntity<List<Team>>  teamReq= new HttpEntity<>(buildHeaders());
+	public Team[] getTeamList(int leagueId) {
 		UriComponentsBuilder uriBuilder= UriComponentsBuilder.fromHttpUrl(uri)
 				.queryParam("action", "get_teams")
-				.queryParam("league_id", leagueId);
-		ResponseEntity<List<Team>> teamResponse= restTemplate.exchange(uriBuilder.toUriString(),
-				HttpMethod.GET, teamReq, new ParameterizedTypeReference<List<Team>>() {
-		});
+				.queryParam("league_id", leagueId)
+				.queryParam("APIkey", "9bb66184e0c8145384fd2cc0f7b914ada57b4e8fd2e4d6d586adcc27c257a978");
+		ResponseEntity<Team[]> teamResponse= restTemplate.exchange(uriBuilder.toUriString(),
+				HttpMethod.GET, new HttpEntity<>(buildHeaders()), Team[].class);
 	
 		return teamResponse.getBody();
 	}
 
 	@Override
-	public List<TeamStanding> getTeamStandingList(int leagueId) {
-		HttpEntity<List<TeamStanding>>  teamStandReq= new HttpEntity<>(buildHeaders());
+	public TeamStanding[] getTeamStandingList(int leagueId) {
 		UriComponentsBuilder uriBuilder= UriComponentsBuilder.fromHttpUrl(uri)
 				.queryParam("action", "get_standings")
-				.queryParam("league_id", leagueId);
-		ResponseEntity<List<TeamStanding>> teamStandResponse= restTemplate.exchange(uriBuilder.toUriString(),
-				HttpMethod.GET, teamStandReq, new ParameterizedTypeReference<List<TeamStanding>>() {
-		});
+				.queryParam("league_id", leagueId)
+				.queryParam("APIkey", "9bb66184e0c8145384fd2cc0f7b914ada57b4e8fd2e4d6d586adcc27c257a978");
+		ResponseEntity<TeamStanding[]> teamStandResponse= restTemplate.exchange(uriBuilder.toUriString(),
+				HttpMethod.GET, new HttpEntity<>(buildHeaders()), TeamStanding[].class);
 	
 		return teamStandResponse.getBody();
 	}
 	
 	HttpHeaders buildHeaders() {
 		HttpHeaders headers= new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON);
+		//headers.setContentType(MediaType.APPLICATION_JSON);
 		//headers.set("action", actionType);
-		headers.set("APIkey", "9bb66184e0c8145384fd2cc0f7b914ada57b4e8fd2e4d6d586adcc27c257a978");
+		headers.set(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE);
+		//headers.set("APIkey", "9bb66184e0c8145384fd2cc0f7b914ada57b4e8fd2e4d6d586adcc27c257a978");
 		
 		return headers;
 	}

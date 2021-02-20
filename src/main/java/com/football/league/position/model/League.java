@@ -23,6 +23,17 @@ public class League {
 	@JsonProperty("league_name")
 	String leagueName;
 	
+	public League()
+	{
+		
+	}
+	
+	public League(int leagueId, String leagueName) {
+		super();
+		this.leagueId = leagueId;
+		this.leagueName = leagueName;
+	}
+
 	public int getLeagueId() {
 		return leagueId;
 	}

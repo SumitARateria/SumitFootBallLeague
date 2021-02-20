@@ -27,13 +27,13 @@ public class LeaguePostionResult {
 	String teamIdName;
 	
 	@JsonProperty("overall_league_position")
-	String overallLeaguePosition;
+	int overallLeaguePosition;
 	
 	public LeaguePostionResult() {
 	}
 
 	public LeaguePostionResult(String countryIdName, String leagueIdName, String teamIdName,
-			String overallLeaguePosition) {
+			int overallLeaguePosition) {
 		super();
 		this.countryIdName = countryIdName;
 		this.leagueIdName = leagueIdName;
@@ -65,11 +65,11 @@ public class LeaguePostionResult {
 		this.teamIdName = teamIdName;
 	}
 
-	public String getOverallLeaguePosition() {
+	public int getOverallLeaguePosition() {
 		return overallLeaguePosition;
 	}
 
-	public void setOverallLeaguePosition(String overallLeaguePosition) {
+	public void setOverallLeaguePosition(int overallLeaguePosition) {
 		this.overallLeaguePosition = overallLeaguePosition;
 	}
 	

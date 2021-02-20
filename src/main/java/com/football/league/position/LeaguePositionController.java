@@ -1,6 +1,7 @@
 package com.football.league.position;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,15 +28,15 @@ public class LeaguePositionController {
 	public List<LeaguePostionResult> leaguePosition()
 	{
 		List<LeaguePostionResult> resultPosition= new ArrayList<LeaguePostionResult>();
-		List<Country> countryList= leaguePositionService.getCountryList();
+		List<Country> countryList= getCountries();
 		
 		for(Country ctr: countryList) {
 			
-			List<League> leagueList= leaguePositionService.getLeagueList(ctr.getCountryId());
+			List<League> leagueList= getLeagues(ctr.getCountryId());
 			
 			for(League leagueObj: leagueList ) {
 					
-					List<TeamStanding> teamStandList= leaguePositionService.getTeamStandingList(leagueObj.getLeagueId());
+					List<TeamStanding> teamStandList= getTeamStanding(leagueObj.getLeagueId());
 					
 					for(TeamStanding tstand: teamStandList) {
 						resultPosition.add(new LeaguePostionResult(ctr.getCountryId() + "-" + tstand.getCountryName(), 
@@ -48,6 +49,18 @@ public class LeaguePositionController {
 		}
 		return resultPosition;
 		
+	}
+	
+	private List<Country> getCountries(){
+		return new ArrayList<>(Arrays.asList(leaguePositionService.getCountryList()));
+	}
+	
+	private List<League> getLeagues(int countryId){
+		return new ArrayList<>(Arrays.asList(leaguePositionService.getLeagueList(countryId)));
+	}
+	
+	private List<TeamStanding> getTeamStanding(int leagueId){
+		return new ArrayList<>(Arrays.asList(leaguePositionService.getTeamStandingList(leagueId)));
 	}
 
 }

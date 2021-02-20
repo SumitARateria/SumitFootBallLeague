@@ -9,10 +9,10 @@ import com.football.league.position.model.TeamStanding;
 
 public interface LeaguePositionService {
 	
-	public List<Country> getCountryList();
-	public List<League> getLeagueList(int countryId);
-	public List<Team> getTeamList(int leagueId);
-	public List<TeamStanding> getTeamStandingList(int leagueId);
+	public Country[] getCountryList();
+	public League[] getLeagueList(int countryId);
+	public Team[] getTeamList(int leagueId);
+	public TeamStanding[] getTeamStandingList(int leagueId);
 	
 
 }
