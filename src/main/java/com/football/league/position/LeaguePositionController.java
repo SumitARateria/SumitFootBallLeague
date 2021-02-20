@@ -19,48 +19,12 @@ import com.football.league.position.service.LeaguePositionService;
 public class LeaguePositionController {
 	
 	@Autowired
-	private RestTemplate restTemplate;
-	
-	@Autowired
 	private LeaguePositionService leaguePositionService;
 	
 	@RequestMapping("/")
-	public List<LeaguePostionResult> leaguePosition()
-	{
-		List<LeaguePostionResult> resultPosition= new ArrayList<LeaguePostionResult>();
-		List<Country> countryList= getCountries();
+	public List<LeaguePostionResult> leaguePosition(){	
+		return leaguePositionService.getLeaguePositionResults();
 		
-		for(Country ctr: countryList) {
-			
-			List<League> leagueList= getLeagues(ctr.getCountryId());
-			
-			for(League leagueObj: leagueList ) {
-					
-					List<TeamStanding> teamStandList= getTeamStanding(leagueObj.getLeagueId());
-					
-					for(TeamStanding tstand: teamStandList) {
-						resultPosition.add(new LeaguePostionResult(ctr.getCountryId() + "-" + tstand.getCountryName(), 
-								tstand.getLeagueId() + "-" + tstand.getLeagueName(),
-								tstand.getTeamId() + "-" + tstand.getTeamName(),
-								tstand.getOverallLeaguePosition()));
-					
-				}
-			}		
-		}
-		return resultPosition;
-		
-	}
-	
-	private List<Country> getCountries(){
-		return new ArrayList<>(Arrays.asList(leaguePositionService.getCountryList()));
-	}
-	
-	private List<League> getLeagues(int countryId){
-		return new ArrayList<>(Arrays.asList(leaguePositionService.getLeagueList(countryId)));
-	}
-	
-	private List<TeamStanding> getTeamStanding(int leagueId){
-		return new ArrayList<>(Arrays.asList(leaguePositionService.getTeamStandingList(leagueId)));
 	}
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.football.league.position.model.Country;
 import com.football.league.position.model.League;
+import com.football.league.position.model.LeaguePostionResult;
 import com.football.league.position.model.Team;
 import com.football.league.position.model.TeamStanding;
 
@@ -13,6 +14,7 @@ public interface LeaguePositionService {
 	public League[] getLeagueList(int countryId);
 	public Team[] getTeamList(int leagueId);
 	public TeamStanding[] getTeamStandingList(int leagueId);
+	public List<LeaguePostionResult> getLeaguePositionResults();
 	
 
 }

@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatcher;
 import org.mockito.ArgumentMatchers;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.core.ParameterizedTypeReference;
@@ -32,13 +33,13 @@ public class LeaguePositionServiceImplTest {
 	@Mock
 	private RestTemplate restTemplate;
 	
-	@Mock
+	@InjectMocks
 	private Country ctr;
 	
-	@Mock
+	@InjectMocks
 	private League league;
 	
-	@Mock
+	@InjectMocks
 	private TeamStanding teamStanding;
 	
 	@Before
@@ -50,7 +51,7 @@ public class LeaguePositionServiceImplTest {
 	public void testCountryListSuccess() {
 		
 		when(restTemplate.exchange(ArgumentMatchers.anyString(), ArgumentMatchers.any(), 
-				 ArgumentMatchers.any(), ArgumentMatchers.<Class<List<Country>>>any()))
+				 ArgumentMatchers.any(), ArgumentMatchers.<Class<String>>any()))
 				.thenReturn(new ResponseEntity(new ArrayList().add(new Country(1, "USA")), HttpStatus.ACCEPTED));
 		
 		String country= ctr.getCountryName() ;
@@ -61,7 +62,7 @@ public class LeaguePositionServiceImplTest {
 	public void testLeagueListSuccess() {
 		
 		when(restTemplate.exchange(ArgumentMatchers.anyString(), ArgumentMatchers.any(), 
-				 ArgumentMatchers.any(), ArgumentMatchers.<Class<List<League>>>any()))
+				 ArgumentMatchers.any(), ArgumentMatchers.<Class<League[]>>any()))
 				.thenReturn(new ResponseEntity(new ArrayList().add(new League(4324, "LeagueTest")), HttpStatus.ACCEPTED));
 		
 		String leagueName= league.getLeagueName() ;
@@ -72,7 +73,7 @@ public class LeaguePositionServiceImplTest {
 	public void testTeamStandingListSuccess() {
 		
 		when(restTemplate.exchange(ArgumentMatchers.anyString(), ArgumentMatchers.any(), 
-				 ArgumentMatchers.any(), ArgumentMatchers.<Class<List<TeamStanding>>>any()))
+				 ArgumentMatchers.any(), ArgumentMatchers.<Class<TeamStanding[]>>any()))
 				.thenReturn(new ResponseEntity(new ArrayList().add(new TeamStanding(1, "USA", "LeagueTest", 2421, "TeamTest", 3)), HttpStatus.ACCEPTED));
 		
 		int teamPostiton= teamStanding.getOverallLeaguePosition();
